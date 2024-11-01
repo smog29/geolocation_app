@@ -4,7 +4,7 @@ class GeolocationsController < ApplicationController
   require "resolv"
 
   BASE_URL = "http://api.ipstack.com"
-  ACCESS_KEY = ENV["IPSTACK_ACCESS_KEY"]
+  ACCESS_KEY = ENV["IPSTACK_API_KEY"]
 
   skip_before_action :verify_authenticity_token
 
