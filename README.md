@@ -40,7 +40,7 @@ get http://localhost:3000/geolocations/
 ```bash
 post http://localhost:3000/geolocations/
 {
-	"address": "www.wp.pl"
+  "address": "www.wp.pl"
 }
 ```
 address could be a url or an IP address in all requests:
