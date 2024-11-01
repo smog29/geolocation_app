@@ -1,5 +1,5 @@
 class Geolocation < ApplicationRecord
-  validates :ip_address, uniqueness: true
+  validates :ip_address, uniqueness: { case_sensitive: false }
 
-  validates :ip_address, :latitude, :longiture, :city, :country, presence: true
+  validates :ip_address, :latitude, :longitude, :city, :country, presence: true
 end
