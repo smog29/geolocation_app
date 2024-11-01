@@ -17,11 +17,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_01_110559) do
   create_table "geolocations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "ip_address"
-    t.string "latitude"
-    t.string "longitude"
-    t.string "city"
-    t.string "country"
+    t.string "ip_address", null: false
+    t.string "latitude", null: false
+    t.string "longitude", null: false
+    t.string "city", null: false
+    t.string "country", null: false
     t.index ["ip_address"], name: "index_geolocations_on_ip_address", unique: true
   end
 end
