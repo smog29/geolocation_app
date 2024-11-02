@@ -38,26 +38,26 @@ The API operates using JSON
 
 * List geolocations:
 ```bash
-get http://localhost:3000/geolocations/
+get http://localhost:3000/api/v1/geolocations/
 ```
 
 * Add geolocation:
 ```bash
-post http://localhost:3000/geolocations/
+post http://localhost:3000/api/v1/geolocations/
 {
   "address": "www.wp.pl"
 }
 ```
 address could be a url or an IP address in all requests:
 ```bash
-post http://localhost:3000/geolocations/
+post http://localhost:3000/api/v1/geolocations/
 {
   "address": "212.77.98.9"
 }
 ```
 * Show geolocation (from db):
 ```bash
-get http://localhost:3000/geolocations/find
+get http://localhost:3000/api/v1/geolocations/find
 {
   "address": "www.wp.pl"
 }
@@ -65,7 +65,7 @@ get http://localhost:3000/geolocations/find
 
 * Update geolocation:
 ```bash
-put http://localhost:3000/geolocations/update
+put http://localhost:3000/api/v1/geolocations/update
 {
   "address": "www.wp.pl"
 }
@@ -73,7 +73,7 @@ put http://localhost:3000/geolocations/update
 
 * Delete geolocation:
 ```bash
-delete http://localhost:3000/geolocations/delete
+delete http://localhost:3000/api/v1/geolocations/delete
 {
   "address": "www.wp.pl"
 }

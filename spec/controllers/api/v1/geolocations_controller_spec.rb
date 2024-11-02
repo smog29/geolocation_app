@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe GeolocationsController, type: :controller do
+RSpec.describe Api::V1::GeolocationsController, type: :controller do
   let(:ip_address) { "162.158.202.18" }
   let(:resolved_ip) { ip_address }
   let(:valid_attributes) { { address: "example.com" } }

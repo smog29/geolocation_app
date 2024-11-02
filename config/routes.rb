@@ -9,13 +9,17 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  resources :geolocations, only: [ :create, :index ]
+  namespace :api do
+    namespace :v1 do
+      resources :geolocations, only: [ :create, :index ]
 
-  get "geolocations/find", to: "geolocations#show"
+      get "geolocations/find", to: "geolocations#show"
 
-  put "geolocations/update", to: "geolocations#update"
+      put "geolocations/update", to: "geolocations#update"
 
-  delete "geolocations/delete", to: "geolocations#destroy"
+      delete "geolocations/delete", to: "geolocations#destroy"
+    end
+  end
 
   match "*unmatched",
         to: ->(env) { [ 404, { "Content-Type" => "application/json" }, [ { error: "Not Found" }.to_json ] ] }, via: :all
