@@ -3,23 +3,24 @@
 ### How to run the application:
 * Generate RAILS_MASTER_KEY:
 ```bash
+rm config/credentials.yml.enc
 rails credentials:edit
 ```
 * Open config/master.key
 
 * Add secrets to .env:
 ```bash
-POSTGRES_HOST=db # To connect to the image
+POSTGRES_HOST=localhost
 POSTGRES_DB=<db_name>
 POSTGRES_USER=<db_user>
 POSTGRES_PASSWORD=<db_password>
 RAILS_MASTER_KEY=<generated_master_key>
 IPSTACK_API_KEY=<IPSTACK_API_KEY>
-RAILS_ENV=production
+RAILS_ENV=development # development or production
 ```
 * Run the containers:
 ```bash
-docker-compose up build
+docker-compose build
 docker-compose up
 ```
 
