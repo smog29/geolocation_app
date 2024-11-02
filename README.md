@@ -51,7 +51,7 @@ post http://localhost:3000/geolocations/
   "address": "212.77.98.9"
 }
 ```
-* Show geolocation:
+* Show geolocation (from db):
 ```bash
 get http://localhost:3000/geolocations/find
 {

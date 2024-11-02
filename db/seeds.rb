@@ -5,13 +5,6 @@
 
 records = [
   {
-    "ip_address": "212.77.98.9",
-    "latitude": "54.31930923461914",
-    "longitude": "18.63736915588379",
-    "city": "Gdańsk",
-    "country": "Poland"
-  },
-  {
   "ip_address": "57.144.110.1",
   "latitude": "38.98371887207031",
   "longitude": "-77.38275909423828",
@@ -31,9 +24,16 @@ records = [
   "longitude": "16.20244026184082",
   "city": "Koszalin",
   "country": "Poland"
+  },
+  {
+  "ip_address": "216.58.215.101",
+  "latitude": "37.38801956176758",
+  "longitude": "-122.07431030273438",
+  "city": "Mountain View",
+  "country": "United States"
   }
 ]
 
 records.each do |record|
-  Geolocation.find_or_create_by!(record)
+  Geolocation.find_or_create_by(record)
 end
