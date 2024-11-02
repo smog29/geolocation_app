@@ -1,7 +1,11 @@
 # README
 
+### About
+Application to store geolocation data based on IP or URL.
+
 ### How to run the application:
-* Generate RAILS_MASTER_KEY:
+* Get IPStack API key: https://ipstack.com/
+* Generate Master Key:
 ```bash
 rm config/credentials.yml.enc
 rails credentials:edit
