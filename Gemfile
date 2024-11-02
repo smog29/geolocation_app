@@ -33,7 +33,7 @@ gem "bootsnap", require: false
 
 gem "net-pop", github: "ruby/net-pop"
 
-gem 'pry', '~> 0.14.2'
+gem "pry", "~> 0.14.2"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -63,5 +63,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "shoulda-matchers", "~> 6.0"
-  gem 'webmock'
+  gem "webmock"
 end
