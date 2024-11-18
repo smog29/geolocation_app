@@ -33,7 +33,7 @@ gem "bootsnap", require: false
 
 gem "net-pop", github: "ruby/net-pop"
 
-gem "pry", "~> 0.14.2"
+gem "pry", "~> 0.15.0"
 
 gem 'active_model_serializers'
 
