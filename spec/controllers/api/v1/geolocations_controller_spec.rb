@@ -131,6 +131,7 @@ RSpec.describe "Geolocations API", type: :request do
           delete "/api/v1/geolocations/delete", params: { address: "example.com" }
         }.to change(Geolocation, :count).by(-1)
         expect(response).to have_http_status(:success)
+        expect(JSON.parse(response.body)["message"]).to eq("Geolocation deleted")
       end
     end
 
