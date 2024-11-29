@@ -15,18 +15,16 @@ module Api
       end
 
       def show
-        ip_address = resolve_address(params[:address])
-        geolocation = Geolocation.find_by(ip_address:)
+        response = GeolocationManager::FindGeolocationService.new(ip_address).call
 
-        if geolocation
-          render json: geolocation
+        if response.success
+          render json: response.data
         else
-          render json: { errors: "Geolocation not found" }, status: :not_found
+          render json: { errors: response.errors }, status: :not_found
         end
       end
 
       def create
-        ip_address = resolve_address(params[:address])
         response = GeolocationManager::CreateGeolocationService.new(ip_address).call
 
         if response.success
@@ -37,7 +35,6 @@ module Api
       end
 
       def update
-        ip_address = resolve_address(params[:address])
         response = GeolocationManager::UpdateGeolocationService.new(ip_address).call
 
         if response.success
@@ -48,7 +45,6 @@ module Api
       end
 
       def destroy
-        ip_address = resolve_address(params[:address])
         geolocation = Geolocation.find_by(ip_address:)
 
         if geolocation
@@ -60,6 +56,10 @@ module Api
       end
 
       private
+
+      def ip_address
+        resolve_address(params[:address])
+      end
 
       def resolve_address(address)
         Resolv.getaddress(address)
