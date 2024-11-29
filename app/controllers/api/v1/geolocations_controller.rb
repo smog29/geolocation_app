@@ -45,13 +45,12 @@ module Api
       end
 
       def destroy
-        geolocation = Geolocation.find_by(ip_address:)
+        response = GeolocationManager::DestroyGeolocationService.new(ip_address).call
 
-        if geolocation
-          geolocation.destroy
+        if response.success
           render json: { message: "Geolocation deleted" }
         else
-          render json: { errors: "Geolocation not found" }, status: :not_found
+          render json: { errors: response.errors }, status: :not_found
         end
       end
 
