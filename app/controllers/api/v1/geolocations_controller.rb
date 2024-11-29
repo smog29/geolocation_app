@@ -21,23 +21,30 @@ module Api
         if geolocation
           render json: geolocation
         else
-          render json: { error: "Geolocation not found" }, status: :not_found
+          render json: { errors: "Geolocation not found" }, status: :not_found
         end
       end
 
       def create
         ip_address = resolve_address(params[:address])
+        response = GeolocationManager::CreateGeolocationService.new(ip_address).call
 
-        service = CreateGeolocationService.new(ip_address).call
-
-        render json: service[:json], status: service[:status]
+        if response.success
+          render json: response.data, status: :created
+        else
+          render json: { errors: response.errors }, status: :conflict
+        end
       end
 
       def update
         ip_address = resolve_address(params[:address])
-        service = UpdateGeolocationService.new(ip_address).call
+        response = GeolocationManager::UpdateGeolocationService.new(ip_address).call
 
-        render json: service[:json], status: service[:status]
+        if response.success
+          render json: response.data
+        else
+          render json: { errors: response.errors }, status: :not_found
+        end
       end
 
       def destroy
@@ -48,7 +55,7 @@ module Api
           geolocation.destroy
           render json: { message: "Geolocation deleted" }
         else
-          render json: { error: "Geolocation not found" }, status: :not_found
+          render json: { errors: "Geolocation not found" }, status: :not_found
         end
       end
 
@@ -66,7 +73,7 @@ module Api
 
       def validate_address!
         if !valid_address?(params[:address]) || resolve_address(params[:address]).blank?
-          render json: { error: "Valid IP address or URL must be provided" }, status: :unprocessable_entity
+          render json: { errors: "Valid IP address or URL must be provided" }, status: :unprocessable_entity
         end
       end
     end

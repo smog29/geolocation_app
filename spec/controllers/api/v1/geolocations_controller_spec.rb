@@ -1,5 +1,13 @@
 require 'rails_helper'
 
+RSpec.shared_examples "unprocessable_entity" do
+  it "returns unprocessable entity status" do
+    subject
+    expect(response).to have_http_status(:unprocessable_entity)
+    expect(JSON.parse(response.body)["errors"]).to eq("Valid IP address or URL must be provided")
+  end
+end
+
 RSpec.describe Api::V1::GeolocationsController, type: :controller do
   let(:ip_address) { "162.158.202.18" }
   let(:resolved_ip) { ip_address }
@@ -53,10 +61,8 @@ RSpec.describe Api::V1::GeolocationsController, type: :controller do
     end
 
     context "when address is not valid" do
-      it "returns unprocessable entity status" do
-        get :show, params: { address: "" }
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(JSON.parse(response.body)["error"]).to eq("Valid IP address or URL must be provided")
+      it_behaves_like "unprocessable_entity" do
+        subject { get :show, params: { address: "" } }
       end
     end
   end
@@ -78,15 +84,13 @@ RSpec.describe Api::V1::GeolocationsController, type: :controller do
       it "returns conflict status" do
         post :create, params: valid_attributes
         expect(response).to have_http_status(:conflict)
-        expect(JSON.parse(response.body)["error"]).to eq("Geolocation already exists")
+        expect(JSON.parse(response.body)["errors"]).to eq("Geolocation already exists")
       end
     end
 
     context "when address is invalid" do
-      it "returns unprocessable entity status" do
-        post :create, params: { address: "" }
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(JSON.parse(response.body)["error"]).to eq("Valid IP address or URL must be provided")
+      it_behaves_like "unprocessable_entity" do
+        subject { post :create, params: { address: "" } }
       end
     end
   end
@@ -112,10 +116,8 @@ RSpec.describe Api::V1::GeolocationsController, type: :controller do
     end
 
     context "when address is invalid" do
-      it "returns unprocessable entity status" do
-        put :update, params: { address: "" }
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(JSON.parse(response.body)["error"]).to eq("Valid IP address or URL must be provided")
+      it_behaves_like "unprocessable_entity" do
+        subject { put :update, params: { address: "" } }
       end
     end
   end
@@ -143,10 +145,8 @@ RSpec.describe Api::V1::GeolocationsController, type: :controller do
     end
 
     context "when address is invalid" do
-      it "returns unprocessable entity status" do
-        delete :destroy, params: { address: "" }
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(JSON.parse(response.body)["error"]).to eq("Valid IP address or URL must be provided")
+      it_behaves_like "unprocessable_entity" do
+        subject { delete :destroy, params: { address: "" } }
       end
     end
   end
