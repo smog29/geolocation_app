@@ -15,7 +15,7 @@ module Api
       end
 
       def show
-        response = GeolocationManager::FindGeolocationService.new(ip_address).call
+        response = GeolocationManager::FindGeolocationService.call(ip_address)
 
         if response.success
           render json: response.data
@@ -25,7 +25,7 @@ module Api
       end
 
       def create
-        response = GeolocationManager::CreateGeolocationService.new(ip_address).call
+        response = GeolocationManager::CreateGeolocationService.call(ip_address)
 
         if response.success
           render json: response.data, status: :created
@@ -35,7 +35,7 @@ module Api
       end
 
       def update
-        response = GeolocationManager::UpdateGeolocationService.new(ip_address).call
+        response = GeolocationManager::UpdateGeolocationService.call(ip_address)
 
         if response.success
           render json: response.data
@@ -45,7 +45,7 @@ module Api
       end
 
       def destroy
-        response = GeolocationManager::DestroyGeolocationService.new(ip_address).call
+        response = GeolocationManager::DestroyGeolocationService.call(ip_address)
 
         if response.success
           render json: { message: "Geolocation deleted" }

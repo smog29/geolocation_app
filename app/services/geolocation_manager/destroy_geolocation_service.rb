@@ -11,9 +11,9 @@ module GeolocationManager
 
       if geolocation
         geolocation.destroy
-        GeolocationResponse.new(success: true)
+        Results::GeolocationResult.new(success: true)
       else
-        GeolocationResponse.new(success: false, errors: "Geolocation not found")
+        Results::GeolocationResult.new(success: false, errors: "Geolocation not found")
       end
     end
   end

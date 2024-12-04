@@ -10,9 +10,9 @@ module GeolocationManager
       geolocation = Geolocation.find_by(ip_address:)
 
       if geolocation
-        GeolocationResponse.new(success: true, data: geolocation)
+        Results::GeolocationResult.new(success: true, data: geolocation)
       else
-        GeolocationResponse.new(success: false, errors: "Geolocation not found")
+        Results::GeolocationResult.new(success: false, errors: "Geolocation not found")
       end
     end
   end

@@ -2,7 +2,7 @@ require "net/http"
 require "json"
 
 module GeolocationManager
-  class GeolocationService
+  class GeolocationService < ApplicationService
     BASE_URL = "http://api.ipstack.com"
     ACCESS_KEY = ENV["IPSTACK_API_KEY"]
 
